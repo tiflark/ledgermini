@@ -1,0 +1,89 @@
+# Build directories
+build/
+bin/
+obj/
+out/
+
+# IDE
+.vscode/
+.idea/
+*.user
+*.userprefs
+
+# Qt
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+*.moc
+Makefile*
+*.pro.user
+*.pro.user.*
+
+# Executables
+ledgermini
+LedgerMini
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*~
+*.swp
+*.swo
+*.autosave
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+
+# Dependencies
+deps/
+external/
+
+# Backups
+*.bak
+*.backup
+
+# Testing
+tests/test_output/
+*.gcda
+*.gcno
+*.gcov
+
+# Documentation
+doc/
+docs/build/
+*.aux
+*.log
+*.toc
+*.out
+
+# Package
+*.deb
+*.rpm
+*.tar.gz
+*.zip
+
+# Coverage
+coverage/
+*.gcov
+*.gcda
+*.gcno
+
+# Local development
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
