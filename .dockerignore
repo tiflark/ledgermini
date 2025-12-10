@@ -1,0 +1,10 @@
+build/
+*.db
+*.sqlite
+.git/
+.vscode/
+.idea/
+*.o
+*.so
+CMakeCache.txt
+CMakeFiles/

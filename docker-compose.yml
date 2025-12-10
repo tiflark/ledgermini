@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  ledgermini:
+    build: .
+    image: ledgermini:latest
+    container_name: ledgermini
+    environment:
+      - DISPLAY=${DISPLAY:-:99}
+      - QT_QPA_PLATFORM=xcb
+    volumes:
+      # Mount X11 socket for GUI (Linux only)
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Mount data directory for persistence
+      - ./data:/app/data:rw
+      # Mount database directory
+      - ./data/db:/app/data/db:rw
+    devices:
+      # Optional: for better performance
+      - /dev/dri:/dev/dri
+    network_mode: host
+    # For Linux with X11
+    privileged: true
+    shm_size: '2gb'
+    stdin_open: true
+    tty: true
+    
+  # Optional: database backup service
+  backup:
+    image: alpine:latest
+    container_name: ledgermini-backup
+    depends_on:
+      - ledgermini
+    volumes:
+      - ./data/db:/data/db:ro
+      - ./backups:/backups
+    command: |
+      sh -c '
+      echo "Backup service started"
+      while true; do
+        sleep 3600
+        if [ -f /data/db/ledgermini.db ]; then
+          cp /data/db/ledgermini.db /backups/ledgermini_$(date +%Y%m%d_%H%M%S).db
+          echo "Backup created at $(date)"
+        fi
+      done
+      '
+    restart: unless-stopped
